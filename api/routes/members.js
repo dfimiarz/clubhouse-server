@@ -2,13 +2,9 @@ const express = require('express');
 
 const router = express.Router();
 
-router.get('/', (req, res, next) => {
+const membersController = require ('../controllers/members.js');
 
-    res.status(200).json({
-        message: 'GET request to /members'
-    })
-
-})
+router.get('/', membersController.get_all_members )
 
 router.post('/', (req, res, next) => {
 
@@ -23,6 +19,8 @@ router.post('/', (req, res, next) => {
         pin: req.body.pin,
         rank: req.body.rank
     }
+
+
 
     res.status(201).json({
         message: 'POST request to /members',

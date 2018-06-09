@@ -3,9 +3,10 @@ const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 
+require('dotenv').config();
+
 const memberRoutes = require('./api/routes/members');
 const guestRoutes = require('./api/routes/guests');
-
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
