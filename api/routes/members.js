@@ -4,21 +4,23 @@ const router = express.Router();
 
 const membersController = require ('../controllers/members.js');
 
+const Member = require('../model/Member');
+
 router.get('/', membersController.get_all_members )
 
 router.post('/', (req, res, next) => {
 
-    const member = {
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        email: req.body.email,
-        phone: req.body.phone,
-        gender: req.body.gender,
-        username: req.body.username,
-        password: req.body.password,
-        pin: req.body.pin,
-        rank: req.body.rank
-    }
+    var m = new Member(
+                req.body.firstname,
+                req.body.lastname,
+                req.body.email,
+                req.body.phone,
+                req.body.gender,
+                req.body.username,
+                req.body.password,
+                req.body.pin,
+                req.body.rank
+            )
 
 
 
