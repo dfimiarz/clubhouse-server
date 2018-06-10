@@ -12,4 +12,4 @@ class Member {
     }
 }
 
-module.export = Member;
+module.exports = Member;

@@ -1,35 +1,22 @@
 const express = require('express');
-
 const router = express.Router();
-
 const membersController = require ('../controllers/members.js');
-
-const Member = require('../model/Member');
-
-router.get('/', membersController.get_all_members )
-
-router.post('/', (req, res, next) => {
-
-    var m = new Member(
-                req.body.firstname,
-                req.body.lastname,
-                req.body.email,
-                req.body.phone,
-                req.body.gender,
-                req.body.username,
-                req.body.password,
-                req.body.pin,
-                req.body.rank
-            )
+const { body } = require('express-validator/check');
 
 
+router.get('/', membersController.get_members )
 
-    res.status(201).json({
-        message: 'POST request to /members',
-        createdMember: member
-    })
-
-})
+router.post('/',[
+        body('firstname').not().isEmpty().trim(),
+        body('lastname').not().isEmpty().trim(),
+        body('email').isEmail().normalizeEmail().withMessage('Invalid email address'),
+        body('phone').not().isEmpty(),
+        body('username').not().isEmpty(),
+        body('password').isLength({ min: 6 }),
+        body('gender').not().isEmpty().isIn(['M', 'F']).withMessage('Invalid gender'),
+        body('rank').isInt({ min: 0, max: 3 }).withMessage('Invalid rank')
+    ],
+    membersController.create_member )
 
 router.get('/:id', (req, res, next) => {
 
