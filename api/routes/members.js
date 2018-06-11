@@ -13,7 +13,7 @@ router.post('/',[
         body('phone').not().isEmpty(),
         body('username').not().isEmpty(),
         body('password').isLength({ min: 6 }),
-        body('gender').not().isEmpty().isIn(['M', 'F']).withMessage('Invalid gender'),
+        body('gender').not().isIn(['M', 'F']).withMessage('Invalid gender'),
         body('rank').isInt({ min: 0, max: 3 }).withMessage('Invalid rank')
     ],
     membersController.create_member )

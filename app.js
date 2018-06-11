@@ -1,15 +1,20 @@
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
+const cors = require('cors');
 
 require('dotenv').config();
 
 const memberRoutes = require('./api/routes/members');
 const guestRoutes = require('./api/routes/guests');
 
+
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
+
+app.use(cors());
+
 
 
 //Routes for handeling API calls
