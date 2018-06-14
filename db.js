@@ -7,10 +7,19 @@ var pool = mysql.createPool({
     database: process.env.DB_DATABASE
 });
 
-var connect = function (callback) {
-    pool.getConnection((error, connection) => {
-        callback(error, connection)
+var getSQLConnection = function () {
+    
+    return new Promise((resolve, reject) => {
+        
+        pool.getConnection((error,connection) => {
+            if( error ){
+                reject( error )
+            }
+            else{
+                resolve( connection);
+            }
+        })
     })
 }
 
-module.exports = connect;
+module.exports = getSQLConnection

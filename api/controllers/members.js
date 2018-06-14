@@ -1,5 +1,5 @@
 
-const connect = require('../../db.js');
+
 const { validationResult } = require('express-validator/check');
 const Member = require('../model/Member.js')
 
@@ -32,31 +32,54 @@ exports.create_member = (req, res, next) => {
          return res.status(422).json({ errors: errors.array() });
     }
 
-    connect( (error, connection) => {
-        if( error ){
-            next(error);
-        } else {
-            var m = new Member(
-                req.body.firstname,
-                req.body.lastname,
-                req.body.email,
-                req.body.phone,
-                req.body.gender,
-                req.body.username,
-                req.body.password,
-                req.body.pin,
-                req.body.rank
-            )
+    var m = new Member(
+        req.body.firstname,
+        req.body.lastname,
+        req.body.email,
+        req.body.phone,
+        req.body.gender,
+        req.body.username,
+        req.body.password,
+        req.body.pin,
+        req.body.rank
+    )
 
-            connection.release();
-
+    m.save()
+    .then( result => {
             res.status(201).json({
-                message: 'POST request to /members',
-                createdMember: m
-            })   
+            message: 'POST request to /members',
+            createdMember: result
+        })
+    })
+    .catch( error => {
+        next(error)
+    })
+
+    // connect( (error, connection) => {
+    //     if( error ){
+    //         next(error);
+    //     } else {
+    //         var m = new Member(
+    //             req.body.firstname,
+    //             req.body.lastname,
+    //             req.body.email,
+    //             req.body.phone,
+    //             req.body.gender,
+    //             req.body.username,
+    //             req.body.password,
+    //             req.body.pin,
+    //             req.body.rank
+    //         )
+
+    //         connection.release();
+
+    //         res.status(201).json({
+    //             message: 'POST request to /members',
+    //             createdMember: m
+    //         })   
                  
-        }
-    });
+    //     }
+    // });
 
 }
 
