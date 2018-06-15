@@ -2,6 +2,7 @@
 
 const { validationResult } = require('express-validator/check');
 const Member = require('../model/Member.js')
+const MemberDAO = require('../model/MemberDAO.js')
 
 
 exports.get_members = (req, res, next) => {
@@ -44,7 +45,7 @@ exports.create_member = (req, res, next) => {
         req.body.rank
     )
 
-    m.save()
+    MemberDAO.addNewMember(m)
     .then( result => {
             res.status(201).json({
             message: 'POST request to /members',

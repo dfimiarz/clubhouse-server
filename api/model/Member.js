@@ -1,4 +1,3 @@
-const getSQLConnection = require('../../db.js');
 
 class Member {
     constructor ( firstname, lastname, email, phone, gender, pin, username, password, rank ){
@@ -11,19 +10,6 @@ class Member {
         this.username = username;
         this.password = password;
         this.rank = rank;
-    }
-
-    save() {
-
-        return getSQLConnection().then(
-            connection => {
-                return Promise.resolve( "Test" )            
-            }
-        )
-        .then( result => {
-            return result
-        })
-
     }
 }
 
