@@ -1,0 +1,30 @@
+{
+  "name": "clubhouse-rest",
+  "version": "1.0.0",
+  "description": "REST API server backend for clubhouse project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run serve",
+    "serve": "node dist/src/server.js",
+    "watch-node": "nodemon dist/src/server.js"
+  },
+  "author": "Daniel Fimiarz",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "express-validator": "^5.2.0",
+    "morgan": "^1.9.0",
+    "mysql": "^2.15.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.4",
+    "@types/dotenv": "^4.0.3",
+    "@types/express": "^4.16.0",
+    "@types/mysql": "^2.15.5",
+    "nodemon": "^1.17.5"
+  }
+}
