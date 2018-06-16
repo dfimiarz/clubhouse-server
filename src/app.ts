@@ -1,41 +1,39 @@
-const express = require('express');
-const app = express();
-const morgan = require('morgan');
-const cors = require('cors');
 
-require('dotenv').config();
+import express from "express"
+import dotenv from "dotenv"
+import cors from "cors"
+
+dotenv.config();
+
 
 const memberRoutes = require('./api/routes/members');
 const guestRoutes = require('./api/routes/guests');
 
+const app = express();
 
-app.use(morgan('dev'));
+app.set("port", process.env.PORT || 3000 )
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
-
 app.use(cors());
-
-
 
 //Routes for handeling API calls
 app.use('/members', memberRoutes);
 app.use('/guests', guestRoutes);
 
-app.use( (req, res, next) => {
+app.use( (req: express.Request, res: express.Response, next: express.NextFunction) => {
     const error = new Error('Not found');
-    error.status = 404;
+    // error. = 404;
     next(error);
 })
 
-app.use( (error, req, res, next) => {
-    res.status(error.status || 500);
+app.use( (req, res) => {
+    res.status(500);
     res.json({
         error: {
-            message: error.message
+            message: "Test"
         }
     })
 })
 
 
-
-module.exports = app;
+export default app;

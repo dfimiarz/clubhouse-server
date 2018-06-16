@@ -1,7 +1,9 @@
-const express = require('express');
-const router = express.Router();
+import express from "express"
 const membersController = require ('../controllers/members.js');
 const { body } = require('express-validator/check');
+
+
+const router = express.Router();
 
 
 router.get('/', membersController.get_members )
