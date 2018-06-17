@@ -34,16 +34,15 @@ export let create_member = (req :Request, res: Response, next: NextFunction) => 
         req.body.pin,
         req.body.rank
     )
-
-    MembersDAO.addNewMember(newmember)
-    .then( (result: any) => {
-            res.status(201).json({
+   
+    MembersDAO.addNewMember(newmember).then((result) => {
+        res.status(201).json({
             message: 'POST request to /members',
             createdMember: result
         });
+    }).
+    catch( error => {
+        next(error);
     })
-    .catch( (error: any) => {
-        next(error)
-    })
-
+    
 }
