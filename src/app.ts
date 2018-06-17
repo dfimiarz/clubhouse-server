@@ -5,6 +5,7 @@ import cors from "cors";
 
 //Import route configurations
 import guestRouter from './api/routes/guests';
+import membersRouter from './api/routes/members';
 
 dotenv.config();
 
@@ -18,13 +19,14 @@ app.use(cors());
 //Routes for handeling API calls
 // app.use('/members', memberRoutes);
 app.use('/guests', guestRouter);
+app.use('/members', membersRouter);
 
 app.use( (req: express.Request, res: express.Response, next: express.NextFunction) => {
     const error = new Error('Not found');
     next(error);
 });
 
-app.use( (error: any,req: express.Request, res: express.Response, next: express.NextFunction) => {
+app.use( (error: Error,req: express.Request, res: express.Response, next: express.NextFunction) => {
     res.status(500);
     res.json({
         error: {

@@ -1,25 +1,23 @@
-var mysql = require('mysql');
+import mysql from "mysql"
 
-var pool = mysql.createPool({
+const pool = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE
 });
 
-var getSQLConnection = function () {
+export default function(): Promise<mysql.Connection> {
     
     return new Promise((resolve, reject) => {
         
-        pool.getConnection((error,connection) => {
+        pool.getConnection((error: mysql.MysqlError,connection: mysql.Connection) => {
             if( error ){
                 reject( error )
             }
             else{
-                resolve( connection);
+                resolve( connection );
             }
         })
-    })
+    });
 }
-
-module.exports = getSQLConnection
