@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { validationResult }from "express-validator/check";
-import MemberRegistrant from "../model/MemberRegistrant";
+import MemberRegistrationInfo from "../model/MemberRegistrationInfo";
 import MembersDAO from './../model/MembersDAO';
 
 
@@ -22,7 +22,7 @@ export let create_member = (req :Request, res: Response, next: NextFunction) => 
     }
 
    
-    let newmember = new MemberRegistrant(
+    let newmember = new MemberRegistrationInfo(
         req.body.firstname,
         req.body.lastname,
         req.body.email,

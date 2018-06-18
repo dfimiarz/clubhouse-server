@@ -25,7 +25,7 @@ export default class MembersDAO {
 
         mysqlconnection = await getDBConnection();
 
-        result = await addMemberQuery(mysqlconnection);
+        result = await addMemberQuery(mysqlconnection,memberinfo);
             
         mysqlconnection.destroy()
              
