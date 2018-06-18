@@ -7,7 +7,12 @@ import cors from "cors";
 import guestRouter from './api/routes/guests';
 import membersRouter from './api/routes/members';
 
-dotenv.config();
+import logger from './utils/logger';
+
+if( process.env.NODE_ENV !== 'production'){
+    dotenv.config();
+}
+
 
 const app = express();
 
@@ -33,6 +38,7 @@ app.use( (error: Error,req: express.Request, res: express.Response, next: expres
             message: error.message
         }
     })
+    logger.error("Error 500: Name: " + error.name);
 });
 
 

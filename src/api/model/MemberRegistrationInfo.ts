@@ -1,4 +1,4 @@
-export default class Member{
+export default class MemberRegistrationInfo{
 
     id: number | null;
     firstname: string; 

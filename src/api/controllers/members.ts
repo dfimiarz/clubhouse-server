@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { validationResult }from "express-validator/check";
-import getConnection from './../../db';
-import Member from './../model/Member';
+import MemberRegistrant from "../model/MemberRegistrant";
 import MembersDAO from './../model/MembersDAO';
 
 
@@ -23,7 +22,7 @@ export let create_member = (req :Request, res: Response, next: NextFunction) => 
     }
 
    
-    let newmember = new Member(
+    let newmember = new MemberRegistrant(
         req.body.firstname,
         req.body.lastname,
         req.body.email,
@@ -42,7 +41,7 @@ export let create_member = (req :Request, res: Response, next: NextFunction) => 
         });
     }).
     catch( error => {
-        next(error);
+        next( error );
     })
     
 }
