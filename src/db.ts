@@ -1,4 +1,6 @@
 import mysql from "mysql"
+import AppError from './lib/AppError/AppError';
+import AppErrorTypes from './lib/AppError/AppErrorTypes';
 
 const pool = mysql.createPool({
     host: process.env.DB_HOST,
@@ -13,7 +15,8 @@ export default function(): Promise<mysql.Connection> {
         
         pool.getConnection((error: mysql.MysqlError,connection: mysql.Connection) => {
             if( error ){
-                reject( error )
+                let apperr = new AppError("Failed to conenct",AppErrorTypes.DATABASE_ERROR);
+                reject( apperr )
             }
             else{
                 resolve( connection );

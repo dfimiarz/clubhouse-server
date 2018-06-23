@@ -7,7 +7,8 @@ import cors from "cors";
 import guestRouter from './api/routes/guests';
 import membersRouter from './api/routes/members';
 
-import logger from './utils/logger';
+//import logger from './utils/logger';
+import errorhandler from './lib/ErrorHandler';
 
 if( process.env.NODE_ENV !== 'production'){
     dotenv.config();
@@ -31,17 +32,7 @@ app.use( (req: express.Request, res: express.Response, next: express.NextFunctio
     next(error);
 });
 
-app.use( (error: Error,req: express.Request, res: express.Response, next: express.NextFunction) => {
-    res.status(500);
-    res.json({
-        error: {
-            message: error.message
-        }
-    })
-    logger.error("Error 500: Name: " + error.name);
-});
-
-
+app.use( errorhandler );
 
 
 export default app;
