@@ -15,7 +15,7 @@ export default function(): Promise<mysql.Connection> {
         
         pool.getConnection((error: mysql.MysqlError,connection: mysql.Connection) => {
             if( error ){
-                let apperr = new AppError("Failed to conenct",AppErrorTypes.DATABASE_ERROR);
+                let apperr = new AppError("Failed to conenct",AppErrorTypes.DB_CONNECT_FAILED);
                 reject( apperr )
             }
             else{

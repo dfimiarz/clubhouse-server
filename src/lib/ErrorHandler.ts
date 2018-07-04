@@ -5,18 +5,20 @@ import isAppError from './AppError/isAppError';
 
 export default (error: Error ,req: express.Request, res: express.Response, next: express.NextFunction) => {
     
+    let errCode = 500;
+    let errMessage = error.message;
+
     if( isAppError(error)){
-        console.log("Got app error");
-    }
-    else{
-        console.log("Not app error");
+        errCode = error.errorCode     
     }
     
-    res.status(500); 
+    logger.error("Error Code: " + errCode  + ", Messasge: " + error.message);
+
+    res.status(errCode); 
     res.json({
         error: {
-            message: error.message
+            message: errMessage
         }
     })
-    logger.error("Error 500: Name: " + error.message);
+    
 }
