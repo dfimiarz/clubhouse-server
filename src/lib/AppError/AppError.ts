@@ -2,18 +2,21 @@ import AppErrorTypes from './AppErrorTypes';
 
 export default class AppError extends Error{
 
-    private _errorType: number;
-    private _errorCode: number;
+    //Specif error type
+    private _errorType: AppErrorTypes;
+    
+    //HTTP error code to pass to the front end
+    private _httpErrorCode: number;
 
-    constructor(message: string, type: AppErrorTypes, code = 500 ){
+    constructor(message: string, type: AppErrorTypes = AppErrorTypes.GENERIC_ERROR, code = 500 ){
         super(message);
         
         if( Error.captureStackTrace ){
             Error.captureStackTrace(this,AppError)
         }
         
-        this._errorType = AppErrorTypes.GENERIC_ERROR;
-        this._errorCode = code;
+        this._errorType = type;
+        this._httpErrorCode = code;
         
     }
 
@@ -25,12 +28,12 @@ export default class AppError extends Error{
         this._errorType = val;
     }
 
-    get errorCode(): number{
-        return this._errorCode;
+    get httpErrorCode(): number{
+        return this._httpErrorCode;
     }
 
-    set errorCode(code: number){
-        this._errorCode = code;
+    set httpErrorCode(code: number){
+        this._httpErrorCode = code;
     }
 }
 
