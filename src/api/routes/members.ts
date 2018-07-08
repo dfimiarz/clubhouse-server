@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express";
 import { body } from "express-validator/check";
-import * as membersController from "./../controllers/members";
+import * as membersController from "../controllers/members";
 
 
 const router: Router = Router();
@@ -13,8 +13,7 @@ router.post('/',[
         body('lastname').not().isEmpty().trim(),
         body('email').isEmail().normalizeEmail().withMessage('Invalid email address'),
         body('phone').not().isEmpty(),
-        body('username').not().isEmpty(),
-        body('password').isLength({ min: 6 }),
+        body('pin').isLength({ min: 5, max: 5 }),
         body('gender').isIn(['M', 'F']).withMessage('Invalid gender'),
         body('rank').isInt({ min: 0, max: 3 }).withMessage('Invalid rank')
     ],

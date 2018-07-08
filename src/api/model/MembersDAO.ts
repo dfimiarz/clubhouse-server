@@ -1,8 +1,8 @@
-import getDBConnection from './../../db';
-import MemberRegistrationInfo from "./MemberRegistrationInfo";
+import getDBConnection from '../../db';
+import NewMember from "./NewMember";
 import { Connection as MySQLConnection, MysqlError, FieldInfo } from 'mysql';
 
-let addMemberQuery = function( conn: MySQLConnection, memberinfo: MemberRegistrationInfo ):Promise<any>{
+let addMemberQuery = function( conn: MySQLConnection, newmember: NewMember ):Promise<any>{
 
     return new Promise((resolve,reject) => {
         conn.query('SELECT 1 + 1 as sum', (error: MysqlError, result: any,fields: FieldInfo[]) => {
@@ -18,14 +18,14 @@ let addMemberQuery = function( conn: MySQLConnection, memberinfo: MemberRegistra
 }
 
 export default class MembersDAO {
-    static addNewMember = async function(memberinfo: MemberRegistrationInfo) { 
+    static addNewMember = async function(newmember: NewMember) { 
         
         let mysqlconnection: MySQLConnection;
         let result: any;
 
         mysqlconnection = await getDBConnection();
 
-        result = await addMemberQuery(mysqlconnection,memberinfo);
+        result = await addMemberQuery(mysqlconnection,newmember);
             
         mysqlconnection.destroy()
              

@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { validationResult }from "express-validator/check";
-import MemberRegistrationInfo from "../model/MemberRegistrationInfo";
-import MembersDAO from './../model/MembersDAO';
+import NewMember from "../model/NewMember";
+import MembersDAO from '../model/MembersDAO';
 
 
 export let get_members = (req: Request, res: Response, next: NextFunction) => {
@@ -22,14 +22,12 @@ export let create_member = (req :Request, res: Response, next: NextFunction) => 
     }
 
    
-    let newmember = new MemberRegistrationInfo(
+    let newmember = new NewMember(
         req.body.firstname,
         req.body.lastname,
         req.body.email,
         req.body.phone,
         req.body.gender,
-        req.body.username,
-        req.body.password,
         req.body.pin,
         req.body.rank
     )

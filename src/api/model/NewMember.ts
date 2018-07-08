@@ -1,14 +1,11 @@
-export default class MemberRegistrationInfo{
+export default class NewMember{
 
-    id: number | null;
     firstname: string; 
     lastname: string; 
     email: string; 
     phone: string; 
     gender: string; 
-    pin: string; 
-    username: string;
-    password: string;
+    pin: string;
     rank: number;
 
     constructor (   firstname: string, 
@@ -16,19 +13,14 @@ export default class MemberRegistrationInfo{
                     email: string, 
                     phone: string, 
                     gender: string, 
-                    pin: string, 
-                    username: string,
-                    password: string,
+                    pin: string,
                     rank: number ){
-        this.id = null,
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.pin = pin;
         this.phone = phone;
         this.gender = gender;
-        this.username = username;
-        this.password = password;
         this.rank = rank;
     }
 

@@ -8,7 +8,7 @@ export default class AppError extends Error{
     //HTTP error code to pass to the front end
     private _httpErrorCode: number;
 
-    constructor(message: string, type: AppErrorTypes = AppErrorTypes.GENERIC_ERROR, code = 500 ){
+    constructor(message: string, type: AppErrorTypes = AppErrorTypes.GENERIC_ERROR, httpErrCode = 500 ){
         super(message);
         
         if( Error.captureStackTrace ){
@@ -16,7 +16,7 @@ export default class AppError extends Error{
         }
         
         this._errorType = type;
-        this._httpErrorCode = code;
+        this._httpErrorCode = httpErrCode;
         
     }
 
