@@ -13,7 +13,7 @@ router.post('/',[
         body('lastname').not().isEmpty().trim(),
         body('email').isEmail().normalizeEmail().withMessage('Invalid email address'),
         body('phone').not().isEmpty(),
-        body('pin').isLength({ min: 5, max: 5 }),
+        body('pin').isLength({ min: 4, max: 4 }),
         body('gender').isIn(['M', 'F']).withMessage('Invalid gender'),
         body('rank').isInt({ min: 0, max: 3 }).withMessage('Invalid rank')
     ],

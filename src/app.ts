@@ -13,9 +13,8 @@ import errorhandler from './lib/ErrorHandler';
 import AppErrorTypes from "./lib/AppError/AppErrorTypes";
 
 if( process.env.NODE_ENV !== 'production'){
-    dotenv.config();
+    dotenv.config({path: `./../.env`});
 }
-
 
 const app = express();
 

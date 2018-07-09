@@ -5,7 +5,12 @@ import { Connection as MySQLConnection, MysqlError, FieldInfo } from 'mysql';
 let addMemberQuery = function( conn: MySQLConnection, newmember: NewMember ):Promise<any>{
 
     return new Promise((resolve,reject) => {
-        conn.query('SELECT 1 + 1 as sum', (error: MysqlError, result: any,fields: FieldInfo[]) => {
+        //call format `addmember`(club , firstname, lastname, email, phone , gender, rank, pin , role , true);
+        let query: string = 'CALL `addmember`(? , ?, ? , ?, ? , ?, ? , ? , ? , true)'
+        conn.query(query,
+            [1,newmember.firstname,newmember.lastname,newmember.email,newmember.phone,newmember.gender,1,newmember.pin, 1],      
+            (error: MysqlError | null, result: any,fields: FieldInfo[] | undefined) => 
+        {
             if( error ){
                 reject( error )
             }
