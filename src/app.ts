@@ -1,8 +1,12 @@
 
 import express from "express";
-import dotenv from "dotenv";
 import cors from "cors";
 import AppError from './lib/AppError/AppError';
+import dotenv from "dotenv";
+
+if( process.env.NODE_ENV !== 'production'){
+    dotenv.config()
+}
 
 //Import route configurations
 import guestRouter from './api/routes/guests';
@@ -12,9 +16,7 @@ import membersRouter from './api/routes/members';
 import errorhandler from './lib/ErrorHandler';
 import AppErrorTypes from "./lib/AppError/AppErrorTypes";
 
-if( process.env.NODE_ENV !== 'production'){
-    dotenv.config({path: `./../.env`});
-}
+
 
 const app = express();
 

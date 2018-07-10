@@ -15,7 +15,8 @@ let addMemberQuery = function( conn: MySQLConnection, newmember: NewMember ):Pro
                 reject( error )
             }
             else{
-                resolve( result )
+                console.log(result[0][0].pid)
+                resolve( result[0][0] )
             }
         })
 
