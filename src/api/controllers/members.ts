@@ -5,9 +5,16 @@ import MembersDAO from '../model/MembersDAO';
 
 
 export let get_members = (req: Request, res: Response, next: NextFunction) => {
+
+    MembersDAO.getMembers().then((result) => {
         res.status(200).json({
-            message: 'GET request to /members'
-        })  
+            message: 'POST request to /members',
+            createdMember: result
+        });
+    }).
+    catch( error => {
+        next( error );
+    })
 
 }
 

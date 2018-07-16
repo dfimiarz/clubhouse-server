@@ -15,8 +15,26 @@ let addMemberQuery = function( conn: MySQLConnection, newmember: NewMember ):Pro
                 reject( error )
             }
             else{
-                console.log(result[0][0].pid)
+                console.dir(result)
                 resolve( result[0][0] )
+            }
+        })
+
+    })
+}
+
+let getMembersQuery = function( conn: MySQLConnection ):Promise<any>{
+
+    return new Promise((resolve,reject) => {
+
+        let query: string = 'SELECT * FROM view_member'
+        conn.query(query,(error: MysqlError | null, result: any,fields: FieldInfo[] | undefined) => 
+        {
+            if( error ){
+                reject( error )
+            }
+            else{
+                resolve( result )
             }
         })
 
@@ -46,6 +64,19 @@ export default class MembersDAO {
 
     static removeMember: () => {
 
+    }
+
+    static getMembers = async function() {
+        let mysqlconnection: MySQLConnection;
+        let result: any;
+
+        mysqlconnection = await getDBConnection();
+
+        result = await getMembersQuery(mysqlconnection);
+            
+        mysqlconnection.destroy()
+             
+        return result; 
     }
 }
 
