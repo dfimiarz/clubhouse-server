@@ -11,6 +11,7 @@ if( process.env.NODE_ENV !== 'production'){
 //Import route configurations
 import guestRouter from './api/routes/guests';
 import membersRouter from './api/routes/members';
+import loginRouter from './api/routes/login';
 
 //import logger from './utils/logger';
 import errorhandler from './lib/ErrorHandler';
@@ -29,6 +30,7 @@ app.use(cors());
 // app.use('/members', memberRoutes);
 app.use('/guests', guestRouter);
 app.use('/members', membersRouter);
+app.use('/login', loginRouter);
 
 app.use( (req: express.Request, res: express.Response, next: express.NextFunction) => {
 
