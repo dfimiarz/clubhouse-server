@@ -1,7 +1,5 @@
 import jwt from 'jsonwebtoken'
 import TokenPayload from './TokenPayload'
-import { rejects } from 'assert';
-import { resolve } from 'url';
 
 export default class JWTTokenHandler{
 
