@@ -1,6 +1,7 @@
 import getDBConnection from '../../db';
 import NewMember from "./NewMember";
 import { Connection as MySQLConnection, MysqlError, FieldInfo } from 'mysql';
+import TokenPayload from '../../lib/Auth/TokenPayload';
 
 let addMemberQuery = function( conn: MySQLConnection, newmember: NewMember ):Promise<any>{
 
@@ -75,6 +76,21 @@ export default class MembersDAO {
         result = await getMembersQuery(mysqlconnection);
             
         mysqlconnection.destroy()
+             
+        return result; 
+    }
+
+    static loginMember = async function(username: string, password: string):Promise<TokenPayload> {
+        let mysqlconnection: MySQLConnection;
+        let result: TokenPayload;
+
+        result = new TokenPayload('jdoe','ABC',1)
+
+        //mysqlconnection = await getDBConnection();
+
+        //result = await getMembersQuery(mysqlconnection);
+            
+        //mysqlconnection.destroy()
              
         return result; 
     }

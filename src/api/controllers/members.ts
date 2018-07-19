@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { validationResult }from "express-validator/check";
 import NewMember from "../model/NewMember";
 import MembersDAO from '../model/MembersDAO';
+import JWTokenHandler from './../../lib/Auth/JWTokenHandler'
 
 
 export let get_members = (req: Request, res: Response, next: NextFunction) => {
@@ -49,4 +50,21 @@ export let create_member = (req :Request, res: Response, next: NextFunction) => 
         next( error );
     })
     
+}
+
+export let login_member = (req: Request, res: Response, next: NextFunction) => {
+
+    //extract user name and password from request
+
+    //Check if credentials match
+    MembersDAO.loginMember('john','john')
+    .then((result) => {
+        res.status(200).json({
+            token: result
+        });
+    }).
+    catch( error => {
+        next( error );
+    })
+
 }

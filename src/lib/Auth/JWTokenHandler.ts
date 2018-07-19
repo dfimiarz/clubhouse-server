@@ -1,9 +1,9 @@
 import jwt from 'jsonwebtoken'
 import TokenPayload from './TokenPayload'
 
-export default class JWTTokenHandler{
+export default class JWTokenHandler{
 
-    static verify = function( token:string, secretKey: string ):Promise<any> {
+    static verifyToken = function( token:string, secretKey: string ):Promise<any> {
 
         return new Promise((resolve,reject) =>
         {
@@ -20,7 +20,7 @@ export default class JWTTokenHandler{
     
     }
 
-    static sign = function( payload: TokenPayload, secretKey: string, options: jwt.SignOptions):Promise<any> {
+    static signToken = function( payload: TokenPayload, secretKey: string, options: jwt.SignOptions):Promise<any> {
 
         return new Promise((resolve,reject) => {
             

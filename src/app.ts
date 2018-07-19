@@ -27,7 +27,6 @@ app.use(express.urlencoded({extended: false}));
 app.use(cors());
 
 //Routes for handeling API calls
-// app.use('/members', memberRoutes);
 app.use('/guests', guestRouter);
 app.use('/members', membersRouter);
 app.use('/login', loginRouter);
