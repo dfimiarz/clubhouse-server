@@ -82,9 +82,12 @@ export default class MembersDAO {
 
     static loginMember = async function(username: string, password: string):Promise<TokenPayload> {
         let mysqlconnection: MySQLConnection;
-        let result: TokenPayload;
 
-        result = new TokenPayload('jdoe','ABC',1)
+        let result = {
+            username: "John",
+            id: "dfsdfsdf",
+            roleId: 1
+        }
 
         //mysqlconnection = await getDBConnection();
 

@@ -59,11 +59,14 @@ export let login_member = (req: Request, res: Response, next: NextFunction) => {
     //Check if credentials match
     MembersDAO.loginMember('john','john')
     .then((result) => {
-        res.status(200).json({
+        return JWTokenHandler.signToken(result,'test',{})
+    })
+    .then((result) =>{
+        res.status(201).json({
             token: result
         });
-    }).
-    catch( error => {
+    })
+    .catch( error => {
         next( error );
     })
 

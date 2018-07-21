@@ -1,13 +1,7 @@
-export default class TokenPayload{
+export default interface TokenPayload{
 
-    public username: string
-    public id: string
-    public roleId: number
-
-    constructor(username: string,id: string, roleId: number){
-        this.username = username
-        this.roleId = roleId
-        this.id = id
-    }
+    username: string
+    id: string
+    roleId: number
 
 }
