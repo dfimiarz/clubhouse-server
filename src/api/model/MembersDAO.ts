@@ -42,6 +42,40 @@ let getMembersQuery = function( conn: MySQLConnection ):Promise<any>{
     })
 }
 
+let getUserAccount = function( conn: MySQLConnection, email:string, pin:string ):Promise<TokenPayload>{
+
+    return new Promise((resolve,reject) => {
+
+        let query: string = 'SELECT p.id,p.email,m.role FROM member m join person p on p.id = m.person_id WHERE email = ? and pin = ?'
+        conn.query(query,[email, pin], (error: MysqlError | null, result: any,fields: FieldInfo[] | undefined) => 
+        {
+            if( error ){
+                reject( error )
+            }
+            else{
+
+                if( result.length == 0 ){
+                    reject(new Error("Invalid login"))
+                }
+                else{
+
+                        //ID should be obfuscated
+                    const userCredentials = {
+                        email: result[0].email,
+                        id: result[0].id,
+                        roleId: parseInt(result[0].role)
+                    }
+
+                    console.log( userCredentials )
+
+                    resolve( userCredentials )
+
+                }
+            }
+        })
+    })
+}
+
 export default class MembersDAO {
     static addNewMember = async function(newmember: NewMember) { 
         
@@ -80,20 +114,14 @@ export default class MembersDAO {
         return result; 
     }
 
-    static loginMember = async function(username: string, password: string):Promise<TokenPayload> {
+    static loginMember = async function(email: string, pin: string):Promise<TokenPayload> {
         let mysqlconnection: MySQLConnection;
 
-        let result = {
-            username: "John",
-            id: "dfsdfsdf",
-            roleId: 1
-        }
+        mysqlconnection = await getDBConnection();
 
-        //mysqlconnection = await getDBConnection();
-
-        //result = await getMembersQuery(mysqlconnection);
+        let result = await getUserAccount(mysqlconnection,email,pin);
             
-        //mysqlconnection.destroy()
+        mysqlconnection.destroy()
              
         return result; 
     }

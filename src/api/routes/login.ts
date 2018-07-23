@@ -7,8 +7,8 @@ const router: Router = Router();
 
 
 router.post('/',[
-        body('username').not().isEmpty().trim(),
-        body('password').not().isEmpty().trim()
+        body('email').isEmail().withMessage('Email missing or malformed'),
+        body('pin').isLength({ min: 4, max: 4 }).withMessage('PIN missing or incorrect lenght')
     ], membersController.login_member)
 
 
