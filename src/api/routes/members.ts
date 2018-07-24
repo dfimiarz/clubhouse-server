@@ -1,14 +1,16 @@
-import { Router, Request, Response } from "express";
-import { body } from "express-validator/check";
-import * as membersController from "../controllers/members";
+import { Router, Request, Response } from "express"
+import { body } from "express-validator/check"
+import * as membersController from "../controllers/members"
+import isManagerMW from '../middleware/isManagerMW'
+import authtokenMW from "../middleware/authtokenMW";
 
 
 const router: Router = Router();
 
 
-router.get('/', membersController.get_members )
+router.get('/',authtokenMW,isManagerMW, membersController.get_members )
 
-router.post('/',[
+router.post('/',isManagerMW,[
         body('firstname').not().isEmpty().trim(),
         body('lastname').not().isEmpty().trim(),
         body('email').isEmail().normalizeEmail().withMessage('Invalid email address'),
@@ -19,7 +21,7 @@ router.post('/',[
     ],
     membersController.create_member )
 
-router.get('/:id', (req, res, next) => {
+router.get('/:id',isManagerMW, (req, res, next) => {
 
     const id = req.params.id;
 
